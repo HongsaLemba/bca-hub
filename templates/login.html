@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Portal - Secure Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="load.png" type="image">
+    <style>
+        body {
+            font-family: 'SN Pro', sans-serif;
+            background-color: #f0f4f8; /* Soft blue-grey background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .auth-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .auth-container h2 {
+            color: #0056b3;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box; /* Ensures padding doesn't stretch the box */
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .submit-btn:hover {
+            background-color: #004494;
+        }
+        .guest-btn {
+            display: block;
+            margin-top: 15px;
+            padding: 14px;
+            background-color: #e2e8f0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .guest-btn:hover {
+            background-color: #cbd5e1;
+        }
+        .toggle-link {
+            margin-top: 25px;
+            display: block;
+            color: #0056b3;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #d93025;
+            background-color: #fce8e6;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="auth-container">
+    
+    <img src="dbrg logo.gif" alt="University Logo" style="width: 140px; margin-bottom: 20px;">
+    
+    <div id="error-box" class="error-message"></div>
+
+    <div id="login-section">
+        <h2>Student Login</h2>
+        <form action="/login" method="POST">
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required placeholder="Enter your password">
+            </div>
+            <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+        <a href="/guest" class="guest-btn">Continue as Guest</a>
+        <span class="toggle-link" onclick="toggleForms()">Need an account? Sign Up</span>
+    </div>
+
+    <div id="signup-section" style="display: none;">
+        <h2>Create Account</h2>
+        <form action="/signup" method="POST">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" name="username" required placeholder="Enter your name">
+            </div>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required placeholder="Create a password">
+            </div>
+            <button type="submit" class="submit-btn">Register</button>
+        </form>
+        <span class="toggle-link" onclick="toggleForms()">Already have an account? Sign In</span>
+    </div>
+
+</div>
+
+<script>
+    // This script catches error messages sent by Python and displays them securely
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorBox = document.getElementById('error-box');
+    
+    if (urlParams.get('error') === 'invalid_credentials') {
+        errorBox.innerText = "Incorrect email or password.";
+        errorBox.style.display = 'block';
+    } else if (urlParams.get('error') === 'email_taken') {
+        errorBox.innerText = "An account with that email already exists.";
+        errorBox.style.display = 'block';
+        toggleForms(); // Automatically switches to the Signup form
+    }
+
+    // Function to visually swap the Login and Signup forms
+    function toggleForms() {
+        const login = document.getElementById('login-section');
+        const signup = document.getElementById('signup-section');
+        errorBox.style.display = 'none'; 
+        
+        if (login.style.display === 'none') {
+            login.style.display = 'block';
+            signup.style.display = 'none';
+        } else {
+            login.style.display = 'none';
+            signup.style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>

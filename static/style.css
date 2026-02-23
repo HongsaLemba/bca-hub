@@ -1,0 +1,505 @@
+/* ========== RESET ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- WIDER MAIN CONTAINER FOR NOTES PAGE --- */
+.notes-page-container {
+    max-width: 1400px; /* Stretches the box wider into the empty space */
+    width: 92%; /* Ensures there is still a neat, even margin on the left and right */
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin: 20px auto; /* Centers it perfectly */
+}
+
+/* --- NOTES GRID --- */
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* FORCES exactly 2 cards side-by-side */
+    gap: 30px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+/* Make it stack in 1 column on mobile phones and small tablets */
+@media (max-width: 950px) {
+    .notes-grid {
+        grid-template-columns: 1fr; 
+    }
+}
+
+.subject-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eaeaea;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Makes the card lift up slightly when hovered */
+.subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.subject-card h4 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+}
+
+.subject-card p.course-code {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* --- DOWNLOAD BUTTON FIX --- */
+.download-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 12px 18px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+    gap: 15px; /* Adds a little space between the long text and the icon */
+}
+
+/* Allows extremely long note titles to wrap neatly to a second line */
+.download-btn span:first-child {
+    white-space: normal; 
+    line-height: 1.4;
+    text-align: left;
+}
+
+.download-btn:hover {
+    background-color: #0056b3; 
+    color: #ffffff;
+    border-color: #0056b3;
+}
+
+.download-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0; /* Prevents the icon from getting squished by long text */
+}
+
+.download-icon {
+    font-size: 1.2rem;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 60px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo img {
+    width: 165px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 38px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #2c3e50;
+}
+
+@media (max-width: 700px) {
+    .right {
+        display: none;
+    }
+}
+
+/* ========== BANNER ========== */
+.banner {
+    height: 220px;
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+    transition: transform 0.3s ease;
+}
+
+.banner img:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .banner {
+        height: 150px;
+    }
+}
+
+/* ========== BANNER TEXT ========== */
+.sec1 {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+}
+
+.secc1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.secc2 {
+    font-size: 18px;
+}
+
+@media (max-width: 1456px) {
+    .secc1 {
+        font-size: 28px;
+    }
+
+    .secc2 {
+        font-size: 16px;
+    }
+
+    .sec1 {
+
+        top: 20%;
+    }
+}
+
+@media (max-width: 768px) {
+    .secc1 {
+        font-size: 28px;
+    }
+
+    .secc2 {
+        font-size: 16px;
+    }
+
+    .sec1 {
+        top: 15%;
+
+    }
+}
+
+@media (max-width: 488px) {
+    .secc1 {
+
+        font-size: 20px;
+    }
+
+    .secc2 {
+        font-size: 10px;
+    }
+
+    .sec1 {
+        top: 15%;
+    }
+}
+
+/* ========== OFFER BOX ========== */
+.cont {
+    display: flex;
+    gap: 40px;
+    height: 390px;
+    padding: 40px 60px;
+    background: #f5fffffe;
+    border-radius: 15px;
+    align-items: stretch;
+}
+
+@media (max-width: 858px) {
+    .cont {
+        display: none;
+
+    }
+}
+
+
+/* LEFT IMAGE BOX */
+.pic {
+    position: relative;
+    width: 50%;
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+.overlay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 8px;
+}
+
+.pic:hover .overlay {
+    opacity: 1;
+    border: 2px solid rgb(242, 247, 247);
+}
+.pic img {
+    width: 100%;
+    height: 90%;
+    margin-top: 30px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+.pic:hover img {
+    transform: scale(1.01);
+    filter: brightness(0.8);
+}
+.pic .overlay a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+.gal {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(229, 240, 241);
+    color: rgb(3, 52, 50);
+    padding: 6px 15px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* RIGHT OFFER BOX */
+.offer {
+    width: 50%;
+    position: relative;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 30px;
+    background: rgb(255, 255, 255);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+.offer h5{
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgb(255, 255, 255);
+    color: red;
+}
+ .pic h5 {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(255, 255, 255);
+}
+.pic h5 a{
+    color: red;
+    text-decoration: none;
+}
+.fac {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(229, 240, 241);
+    padding: 6px 15px;
+    border-radius: 6px;
+}
+
+.fac h3 {
+    margin: 0;
+    color: rgb(3, 52, 50);
+}
+
+
+.faculty-card {
+    width: 23%;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.faculty-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 29px;
+    display: block;
+}
+.faculty-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    border: 3px solid rgb(235, 248, 248);
+    border-radius: 4px;
+}
+.faculty-card p {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+}
+
+.faculty-card a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* ========== BCA SECTION ========== */
+.main {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    padding: 20px 20px;
+    border-radius: 15px;
+    background: #fffffffe;
+}
+
+.bca {
+    max-width: 1200px;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.bca h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: rgb(91, 0, 0);
+}
+
+.bca p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.bca h3 {
+    margin-bottom: 15px;
+    color: rgb(91, 0, 0);
+}
+
+.key {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.key li {
+    margin-bottom: 10px;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.key li:hover {
+    transform: translateX(6px);
+    color: rgb(91, 0, 0);
+}
+
+/* ======== MAIN NOTES ========== */
+.main-notes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 40px 60px;
+    background: #f9f9f9;
+}
+
+.notes {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.notes-bloc {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.notes a {
+    text-decoration: none;
+    color: black;
+}
+
+.notes:hover {
+    transform: translateY(-2px);
+    background-color: rgb(214, 235, 235);
+}
+
+@media (max-width: 857px) {
+    .main-notes {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+    }
+    .notes-bloc{
+        display: block;
+    }
+    .notes-bloc a{
+        text-decoration: none;
+        color: black;
+    }
+}
+
+/* ========== FOOTER ========== */
+footer {
+    background: rgb(130, 206, 230);
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+    margin-top: 60px;
+}
+
+footer p {
+    font-size: 14px;
+}

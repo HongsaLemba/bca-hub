@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from flask import Flask, request, session, redirect, send_from_directory
+from flask import Flask, request, session, redirect, send_from_directory, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 
@@ -99,7 +99,7 @@ def serve_files(filename):
         return send_from_directory(BASE_DIR, filename)
         
     if 'logged_in' not in session:
-        return redirect('/login.html')
+        return redirect(url_for('serve_files', filename='login.html'))
         
     return send_from_directory(BASE_DIR, filename)
 

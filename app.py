@@ -12,19 +12,12 @@ app.secret_key = os.environ.get('SECRET_KEY', 'bca_super_secret_key')
 
 # Set up the Database path to use a persistent 'data' folder for cloud hosting
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-if os.environ.get('RENDER'):
-    # If on Render, we use the /data mount point for persistence
-    DB_PATH = '/data/users.db'
-else:
-    # If local, we keep it in the project folder
-    DB_PATH = os.path.join(BASE_DIR, 'users.db')
+# This works on Render's free tier
+DB_PATH = os.path.join(BASE_DIR, 'users.db')
 
 # --- 2. INITIALIZE SQLITE DATABASE ---
 def init_db():
-    # Ensure the directory for the database exists (crucial for cloud disks)
-    db_dir = os.path.dirname(DB_PATH)
-    if db_dir and not os.path.exists(db_dir):
-        os.makedirs(db_dir)
+
         
     with sqlite3.connect(DB_PATH) as conn:
         conn.execute('''

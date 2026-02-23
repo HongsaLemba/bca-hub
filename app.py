@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from flask import Flask, request, session, redirect, send_from_directory, url_for
+from flask import Flask, render_template, request, session, redirect, send_from_directory, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 
@@ -85,23 +85,28 @@ def logout():
     return redirect('/login.html')
 
 # --- 5. PROTECTED PAGE ROUTES ---
+# --- 5. PROTECTED PAGE ROUTES ---
 @app.route('/')
 @login_required
 def home():
-    return send_from_directory(BASE_DIR, 'project.html')
+    # This looks inside the 'templates' folder automatically
+    return render_template('project.html')
 
 @app.route('/<path:filename>')
 def serve_files(filename):
-    if filename.endswith(('.css', '.png', '.jpg', '.gif')):
-        return send_from_directory(BASE_DIR, filename)
-    
+    # If the user tries to go to login.html directly, serve it from templates
     if filename == 'login.html':
-        return send_from_directory(BASE_DIR, filename)
+        return render_template('login.html')
         
+    # Standard check for images and CSS in the static folder
+    if filename.endswith(('.css', '.png', '.jpg', '.gif')):
+        return send_from_directory(os.path.join(BASE_DIR, 'static'), filename)
+    
+    # Otherwise, protect other pages
     if 'logged_in' not in session:
         return redirect(url_for('serve_files', filename='login.html'))
         
-    return send_from_directory(BASE_DIR, filename)
+    return render_template(filename)
 
 @app.route('/download/<int:semester>/<string:filename>')
 @login_required
